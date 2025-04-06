@@ -4,7 +4,7 @@ import os
 
 REPO_NAME = os.environ["REPO"]
 GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
-repo = Github(TOKEN).get_repo(REPO_NAME)
+repo = Github(GITHUB_TOKEN).get_repo(REPO_NAME)
 
 now = datetime.utcnow()
 review_days = [1, 2, 5, 7, 14, 31, 90, 180, 365]
