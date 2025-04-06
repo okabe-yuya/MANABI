@@ -1,11 +1,12 @@
 from github import Github
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 import os
 
 REPO_NAME = os.environ["REPO"]
 GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
 repo = Github(GITHUB_TOKEN).get_repo(REPO_NAME)
 
+JST = timezone(timedelta(hours=9))
 now = datetime.utcnow()
 review_days = [1, 2, 5, 7, 14, 31, 90, 180, 365]
 
@@ -15,7 +16,8 @@ for day in review_days:
             if issue.pull_request is not None:
                 continue
             
-            days_ago = (now - issue.created_at).days
+            created_at_jst = issue.created_at.astimezone(JST)
+            days_ago = (now.date() - created_at_jst.date()).days
             if days_ago == day:
                     targets.append(issue)
 
