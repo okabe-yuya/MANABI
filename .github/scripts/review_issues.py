@@ -19,9 +19,9 @@ for day in review_days:
             created_at_jst = issue.created_at.astimezone(JST)
             days_ago = (now.date() - created_at_jst.date()).days
             if days_ago == day:
-                    targets.append(issue)
+                    target.append(issue)
 
-        if not targets:
+        if not target:
             continue
 
         body_lines = [
@@ -30,7 +30,7 @@ for day in review_days:
             "以下のIssueを確認してください:",
             "",
         ]
-        for issue in targets:
+        for issue in target:
             body_lines.append(f"- [ ] [#{issue.number} {issue.title}](https://github.com/{REPO_NAME}/issues/{issue.number})")
 
         body = "\n".join(body_lines)
