@@ -5,6 +5,9 @@ on:
     - cron: '0 0 * * *'  # 毎日0時に実行
   workflow_dispatch:
 
+permissions:
+  issues: write
+
 jobs:
   review:
     runs-on: ubuntu-latest
