@@ -2,7 +2,8 @@ name: Create Review Issues
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # 毎日0時に実行
+    # JSTの0時に実行（UTCの15時）
+    - cron: '0 15 * * *'
   workflow_dispatch:
 
 permissions:
