@@ -16,6 +16,11 @@ for day in review_days:
             if issue.pull_request is not None:
                 continue
             
+            # ラベルに '復習' が含まれているかチェック
+            label_names = [label.name for label in issue.labels]
+            if "復習" in label_names:
+                continue  # すでに復習系Issueならスキップ
+
             created_at_jst = issue.created_at.astimezone(JST)
             days_ago = (now.date() - created_at_jst.date()).days
             if days_ago == day:
